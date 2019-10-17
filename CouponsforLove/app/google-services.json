@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "818611060254",
+    "firebase_url": "https://coupons-love.firebaseio.com",
+    "project_id": "coupons-love",
+    "storage_bucket": "coupons-love.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:818611060254:android:ddea35e003e93e70",
+        "android_client_info": {
+          "package_name": "com.vorozhbicky.dmitry.couponsforlove"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "818611060254-8m5a1oai9etk8dn2s8375v3ts32r6o4s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vorozhbicky.dmitry.couponsforlove",
+            "certificate_hash": "819944031377f80981490bd1a238a65d740d121f"
+          }
+        },
+        {
+          "client_id": "818611060254-4ttul1r4f3irjc5nrjapdcpf4dnupnmf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJc0C8IHzPOUQAcvMi3N4oOsCOv7eCZvA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "818611060254-4ttul1r4f3irjc5nrjapdcpf4dnupnmf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Coupons for Love</string>
+    <string name="login">Login</string>
+    <string name="e_mail">E-mail</string>
+    <string name="password">Password</string>
+    <string name="use_coupon">Use coupon</string>
+    <string name="todo">TODO</string>
+    <string name="delete">Delete</string>
+    <string name="copy_url">Copy URL</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="create_coupons">Create coupons</string>
+    <string name="images">Images</string>
+    <string name="description">Description</string>
+    <string name="my_coupons">My coupons</string>
+    <string name="add_new">Add new</string>
+    <string name="about_app">About app</string>
+</resources>

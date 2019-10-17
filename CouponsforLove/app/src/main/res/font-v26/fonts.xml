@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<font-family xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <font
+        android:font="@font/dumb"
+        android:fontStyle="normal"
+        android:fontWeight="400"
+        app:font="@font/dumb"
+        app:fontStyle="normal"
+        app:fontWeight="400"
+
+        />
+    <font
+        android:font="@font/text"
+        android:fontStyle="normal"
+        android:fontWeight="100"
+        app:font="@font/text"
+        app:fontStyle="normal"
+        app:fontWeight="100" />
+</font-family>
