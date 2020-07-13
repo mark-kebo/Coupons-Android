@@ -67,12 +67,8 @@ public class MyCouponAdapter extends RecyclerView.Adapter<MyCouponAdapter.ViewHo
     public void setModels(List<Coupon> couponList) {
         this.couponList = couponList;
         user = FirebaseAuth.getInstance().getCurrentUser();
-        String packName = "dima";
-        final String email = "arolij.corp@gmail.com";
-        if (user != null && Objects.requireNonNull(user.getEmail()).equals(email)) {
-            packName = "kate";
-        }
-        mRef = FirebaseDatabase.getInstance().getReference(packName);
+
+        mRef = FirebaseDatabase.getInstance().getReference(user.getUid()).child("coupons");
         notifyDataSetChanged();
     }
 

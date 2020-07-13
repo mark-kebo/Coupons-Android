@@ -55,16 +55,11 @@ public class MyCouponsActivity extends AppCompatActivity {
         final RecyclerView recyclerView = findViewById(R.id.listForMyCoupons);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         spinner.setVisibility(View.VISIBLE);
-
-        String packName = "dima";
-        final String email = "arolij.corp@gmail.com";
-        if (user != null && Objects.requireNonNull(user.getEmail()).equals(email)) {
-            packName = "kate";
+        if (user != null) {
+            mRef = FirebaseDatabase.getInstance().getReference(user.getUid());
         }
 
-        mRef = FirebaseDatabase.getInstance().getReference(packName);
-
-        Query query = mRef;
+        Query query = mRef.child("coupons");
 
         query.addValueEventListener(new ValueEventListener() {
             private static final String TAG = "Firebase:";

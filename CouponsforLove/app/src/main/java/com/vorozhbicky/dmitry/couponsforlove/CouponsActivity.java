@@ -25,6 +25,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.vorozhbicky.dmitry.couponsforlove.Helpers.CouponAdapter;
 import com.vorozhbicky.dmitry.couponsforlove.Model.Coupon;
+import com.vorozhbicky.dmitry.couponsforlove.Model.UserInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,38 +47,47 @@ public class CouponsActivity extends AppCompatActivity {
         FirebaseUser user = mAuth.getCurrentUser();
         couponAdapter = new CouponAdapter(getApplicationContext());
 
-        String packName = "kate";
-        final String email = "arolij.corp@gmail.com";
-        if (user != null && Objects.requireNonNull(user.getEmail()).equals(email)) {
-            packName = "dima";
+        if (user != null) {
+            mRef = FirebaseDatabase.getInstance().getReference(user.getUid());
         }
-
-        mRef = FirebaseDatabase.getInstance().getReference(packName);
 
         final RecyclerView recyclerView = findViewById(R.id.listForCoupons);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         spinner.setVisibility(View.VISIBLE);
 
-        Query query = mRef;
+        Query query = mRef.child("userInfo");
 
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                List<Coupon> coupons = new ArrayList<>();
-                for (DataSnapshot child : dataSnapshot.getChildren()) {
-                    coupons.add(child.getValue(Coupon.class));
-                }
-                if (coupons.isEmpty()) {
-                    Toast toast = Toast.makeText(getApplicationContext(),
-                            "No coupons listed!",
-                            Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.CENTER, 0, 0);
-                    toast.show();
-                }
-                couponAdapter.setModels(coupons);
-                recyclerView.setAdapter(couponAdapter);
+                com.vorozhbicky.dmitry.couponsforlove.Model.UserInfo userInfo = dataSnapshot.getValue(UserInfo.class);
                 Log.d(TAG, "->" + dataSnapshot.toString());
-                spinner.setVisibility(View.GONE);
+                Query query = FirebaseDatabase.getInstance().getReference(Objects.requireNonNull(userInfo).pairUniqId).child("coupons");
+                query.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        List<Coupon> coupons = new ArrayList<>();
+                        for (DataSnapshot child : dataSnapshot.getChildren()) {
+                            coupons.add(child.getValue(Coupon.class));
+                        }
+                        if (coupons.isEmpty()) {
+                            Toast toast = Toast.makeText(getApplicationContext(),
+                                    "No coupons listed!",
+                                    Toast.LENGTH_SHORT);
+                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            toast.show();
+                        }
+                        couponAdapter.setModels(coupons);
+                        recyclerView.setAdapter(couponAdapter);
+                        Log.d(TAG, "->" + dataSnapshot.toString());
+                        spinner.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        Log.d(TAG, databaseError.getMessage());
+                    }
+                });
             }
 
             @Override
@@ -85,7 +95,6 @@ public class CouponsActivity extends AppCompatActivity {
                 Log.d(TAG, databaseError.getMessage());
             }
         });
-
     }
 
     @Override

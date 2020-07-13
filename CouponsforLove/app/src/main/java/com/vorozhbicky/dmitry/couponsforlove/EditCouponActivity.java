@@ -81,13 +81,12 @@ public class EditCouponActivity extends AppCompatActivity {
 
         mStorageRef = FirebaseStorage.getInstance().getReference();
         user = FirebaseAuth.getInstance().getCurrentUser();
-        String packName = "dima";
-        final String email = "arolij.corp@gmail.com";
-        if (user != null && Objects.requireNonNull(user.getEmail()).equals(email)) {
-            packName = "kate";
-        }
+
         mStorageRef = FirebaseStorage.getInstance().getReference();
-        mRef = FirebaseDatabase.getInstance().getReference(packName);
+        if (user != null) {
+            mRef = FirebaseDatabase.getInstance().getReference(user.getUid()).child("coupons");
+        }
+
         Intent intent = getIntent();
         coupon = new Coupon(intent.getStringExtra("description"),
                 intent.getStringExtra("image"));
